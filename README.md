@@ -1,5 +1,7 @@
 # 🚀 LocoSync
 
+> ⚠️ **Projeto em Construção** - Este projeto ainda está em desenvolvimento ativo. As APIs podem mudar sem aviso prévio.
+
 **Crazy fast, sanely synchronous.**  
 O framework HTTP definitivo para C++20, inspirado na simplicidade do Axios e movido pela performance bruta do C++.
 
