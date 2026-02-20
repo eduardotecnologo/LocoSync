@@ -1,32 +1,19 @@
 #ifndef LOCOSYNC_INTERCEPTOR_HPP
 #define LOCOSYNC_INTERCEPTOR_HPP
 
+#include "request.hpp"
 #include "response.hpp"
-#include <string>
-#include <map>
+#include <memory>
 
-namespace locosync 
-{
-    // Estrutura para Request para ser manipulada pelos interceptors
-    struct Request 
-    {
-        std::string url;
-        std::string method;
-        std::map<std::string, std::string> headers;
-        std::string body;
-        long timeout_ms{5000}; // Timeout padrão de 5 segundos
-    };
+namespace locosync {
 
-    class Interceptor 
-    {
-    public:
-        virtual ~Interceptor() = default;
+class Interceptor {
+public:
+    virtual ~Interceptor() = default;
+    virtual void on_request(Request& req) {}
+    virtual void on_response(Response& res) {}
+};
 
-        // Executado antes da requisição sair (ex: injetar tokens de Auth)
-        virtual void on_request(Request& req) = 0;
+} // namespace locosync
 
-        // Executado após a resposta chegar (ex: logging ou refresh de token)
-        virtual void on_response(Response& res) = 0;
-    };
-}
 #endif // LOCOSYNC_INTERCEPTOR_HPP

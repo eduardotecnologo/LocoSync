@@ -1,15 +1,13 @@
-#ifndef LOCOSYNC_MAIN_HPP
-#define LOCOSYNC_MAIN_HPP
+#ifndef LOCOSYNC_LOCOSYNC_HPP
+#define LOCOSYNC_LOCOSYNC_HPP
 
-// Agregador de todos os componentes do framework
-#include "client.hpp"
+// Versão (inline para evitar ODR)
+inline constexpr char LOCOSYNC_VERSION[] = "0.1.0";
+
+// Includes públicos
 #include "request.hpp"
 #include "response.hpp"
 #include "interceptor.hpp"
+#include "client.hpp"
 
-namespace locosync {
-    // Versão do Framework para auditoria e telemetria
-    inline const std::string VERSION = "0.1.0-alpha";
-}
-
-#endif
+#endif // LOCOSYNC_LOCOSYNC_HPP

@@ -3,41 +3,42 @@
 
 #include <string>
 #include <map>
-#include <vector>
 
-namespace locosync 
-{
-    enum class Method 
-    {GET,POST,PUT,DELETE, PATCH,HEAD,OPTIONS};
+namespace locosync {
 
-    struct Request 
-    {
-        std::string url;
-        Method method{Method::GET};
-        std::map<std::string, std::string> headers;
-        std::string body;
+// Evitamos conflito com a keyword 'delete' usando DELETE_
+enum class Method {
+    GET,
+    POST,
+    PUT,
+    DELETE_,
+    PATCH
+};
 
-        // Segurança: Timeouts agressivos por padrão para evitar ataques de DoS (Slowloris)
-        long timeout_ms{10000}; // Timeout padrão de 10 segundos
-        long connect_timeout_ms{2000}; // 2s para estabelecer conexão
+struct Request {
+    std::string url;
+    Method method{Method::GET};
+    std::map<std::string, std::string> headers;
+    std::string body;
 
-        bool follow_redirects{true}; 
-        int max_redirects{5}; // Limite de redirecionamentos para evitar loops infinitos
+    // Timeouts em milissegundos
+    long timeout_ms{10000};
+    long connect_timeout_ms{2000};
 
-        std::string method_string() const
-        {
-            switch(method) 
-            {
-                case Method::POST: return "POST";
-                case Method::PUT: return "PUT";
-                case Method::DELETE: return "DELETE";
-                case Method::PATCH: return "PATCH";
-                case Method::HEAD: return "HEAD";
-                case Method::OPTIONS: return "OPTIONS";
-                default: return "GET";
-            }
+    bool follow_redirects{true};
+    int max_redirects{5};
+
+    std::string method_string() const {
+        switch (method) {
+            case Method::POST:    return "POST";
+            case Method::PUT:     return "PUT";
+            case Method::DELETE_: return "DELETE";
+            case Method::PATCH:   return "PATCH";
+            default:              return "GET";
         }
-    };
-}
+    }
+};
 
-#endif
+} // namespace locosync
+
+#endif // LOCOSYNC_REQUEST_HPP

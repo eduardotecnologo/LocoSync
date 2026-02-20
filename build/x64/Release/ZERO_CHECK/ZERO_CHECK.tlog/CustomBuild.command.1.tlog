@@ -1,0 +1,10 @@
+^C:\USERS\EDUDEVWIN\DOCUMENTS\GIT\ESPECIALISTAC-\LOCOSYNC\BUILD\CMAKEFILES\CF464CE8C2A82D604F6C56DAC84D8295\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/EduDevWin/Documents/GIT/EspecialistaC-/LocoSync -BC:/Users/EduDevWin/Documents/GIT/EspecialistaC-/LocoSync/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/EduDevWin/Documents/GIT/EspecialistaC-/LocoSync/build/LocoSync.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

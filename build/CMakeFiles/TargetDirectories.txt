@@ -1,0 +1,4 @@
+C:/Users/EduDevWin/Documents/GIT/EspecialistaC-/LocoSync/build/CMakeFiles/locosync.dir
+C:/Users/EduDevWin/Documents/GIT/EspecialistaC-/LocoSync/build/CMakeFiles/pokemon_example.dir
+C:/Users/EduDevWin/Documents/GIT/EspecialistaC-/LocoSync/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/EduDevWin/Documents/GIT/EspecialistaC-/LocoSync/build/CMakeFiles/ZERO_CHECK.dir

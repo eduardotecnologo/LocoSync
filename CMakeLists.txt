@@ -5,17 +5,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Opção para build em modo Release por padrão
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
-# Dependências externas
+# Encontrar dependências
 find_package(CURL REQUIRED)
 find_package(nlohmann_json REQUIRED)
-
-# Inclui diretórios de headers
-include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # Biblioteca LocoSync
 add_library(locosync STATIC
@@ -23,15 +15,30 @@ add_library(locosync STATIC
     src/utils.cpp
 )
 
-target_link_libraries(locosync PRIVATE CURL::libcurl nlohmann_json::nlohmann_json)
+# Linkar libcurl e nlohmann_json na biblioteca
+#target_link_libraries(locosync PRIVATE CURL::libcurl nlohmann_json::nlohmann_json)
+# nlohmann_json é usado nas headers públicas (ex: response.hpp), portanto deve ser PUBLIC
+target_link_libraries(locosync
+    PRIVATE CURL::libcurl
+    PUBLIC  nlohmann_json::nlohmann_json
+)
 
+# Incluir headers publicamente para quem linkar com locosync
 target_include_directories(locosync PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
-# Exemplo executável
-add_executable(example_basic examples/basic_get.cpp)
-target_link_libraries(example_basic PRIVATE locosync)
-# Se estiver usando vcpkg
-set(CMAKE_TOOLCHAIN_FILE "C:/Users/EduDevWin/Documents/GIT/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+# Executável exemplo Pokémon
+add_executable(pokemon_example examples/list_pokemons.cpp)
+
+# Linkar locosync no executável
+target_link_libraries(pokemon_example PRIVATE locosync)
+
+# Garantir que o executável encontre os headers do projeto
+target_include_directories(pokemon_example PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+# Diretório de saída para executáveis (opcional)
+set_target_properties(pokemon_example PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)

@@ -145,7 +145,7 @@ LocoSync/
 
 ---
 
-## 🛠️ Como usar LocoSync
+## 🛠️ Como usar LocoSync, agora na prática!
 
 ### 1. Requisição GET Simples (Assíncrona)
 
