@@ -92,42 +92,56 @@ client->add_interceptor(std::make_unique<AuthInterceptor>());
 ```
 
 **Usar assim:**
+
 ```bash
 export LOCOSYNC_AUTH_TOKEN="seu_token_aqui"
 ./seu_aplicativo
 ```
+
 ```
 
 ---
 
 🛡️ Segurança em Primeiro Lugar
+
+O **LocoSync** foi projetado para desenvolvedores que precisam de uma interface moderna (estilo JavaScript/Axios) sem abrir mão do controle de baixo nível e da performance extrema do C++.
+
 TLS 1.2+ obrigatório: Proteção contra ataques de downgrade.
 Verificação rigorosa de certificados SSL: Evita conexões inseguras.
 Protocolo restrito a HTTP/HTTPS: Mitiga ataques SSRF via protocolos inseguros.
 Gerenciamento seguro de memória: Uso de RAII e smart pointers para evitar vazamentos.
 Timeouts configuráveis: Evita que requisições travem indefinidamente.
 
+- **🚀 Performance "Loco":** Gerenciamento de conexões persistentes e execução assíncrona via `std::future`.
+- **🛡️ Security by Design:** TLS 1.2+ obrigatório, verificação rigorosa de certificados SSL e proteção contra protocolos inseguros.
+- **🧵 Thread-Safe:** Inicialização global protegida por `std::once_flag`, permitindo uso em ambientes multi-thread sem riscos de race conditions.
+- **📦 JSON de Primeira Classe:** Integração nativa com `nlohmann/json` para envio e recebimento de dados.
+- **🔌 Interceptors Potentes:** Manipule requisições e respostas globalmente (ideal para Auth Tokens e Logging).
+- **🔍 Full Header Access:** Suporte completo para leitura de headers de resposta (Cookies, ETag, etc.).
+
 ## 📁 Estrutura do Projeto
 
 ```
+
 LocoSync/
-├── CMakeLists.txt                 # Arquivo de configuração do build
+├── CMakeLists.txt # Arquivo de configuração do build
 ├── include/
-│   └── locosync/
-│       ├── locosync.hpp           # Header principal
-│       ├── client.hpp
-│       ├── response.hpp
-│       ├── request.hpp
-│       └── interceptor.hpp
+│ └── locosync/
+│ ├── locosync.hpp # Header principal
+│ ├── client.hpp
+│ ├── response.hpp
+│ ├── request.hpp
+│ └── interceptor.hpp
 ├── src/
-│   ├── client.cpp
-│   ├── utils.cpp
-│   └── ...
+│ ├── client.cpp
+│ ├── utils.cpp
+│ └── ...
 ├── examples/
-│   └── basic_get.cpp
+│ └── basic_get.cpp
 ├── tests/
-│   └── test_client.cpp
+│ └── test_client.cpp
 └── README.md
+
 ```
 
 ---
@@ -151,3 +165,4 @@ Sinta-se à vontade para abrir Issues ou enviar Pull Requests. Vamos tornar o ec
 ## 📄 Licença
 
 Distribuído sob a licença MIT. Veja LICENSE para mais informações.
+```

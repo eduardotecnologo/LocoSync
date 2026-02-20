@@ -11,14 +11,14 @@ namespace locosync {
 
 class Client {
 public:
-    // Cria uma instância compartilhada do Client
-    static std::shared_ptr<Client> create();
+    // Método genérico (O coração do framework)
+    std::future<Response> request(const Request& req);
 
-    // Método GET síncrono (futuro: async)
+    // Atalhos (Shorthands)
     std::future<Response> get(const std::string& url);
-
-    // Adiciona um interceptor
-    void add_interceptor(std::unique_ptr<Interceptor> interceptor);
+    std::future<Response> post(const std::string& url, const nlohmann::json& body);
+    std::future<Response> put(const std::string& url, const nlohmann::json& body);
+    std::future<Response> del(const std::string& url); // 'delete' é palavra reservada em C++
 
 private:
     Client(); // construtor privado para controle de instância
