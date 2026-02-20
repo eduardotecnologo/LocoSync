@@ -98,8 +98,6 @@ export LOCOSYNC_AUTH_TOKEN="your_token_here"
 ./your_application
 ```
 
-```
-
 ---
 
 ## 🛡️ Security First
@@ -112,6 +110,8 @@ export LOCOSYNC_AUTH_TOKEN="your_token_here"
 - **Secure Memory Management:** Use of RAII and smart pointers to prevent leaks.
 - **Configurable Timeouts:** Prevents requests from hanging indefinitely.
 
+### Key Features
+
 - **🚀 "Loco" Performance:** Persistent connection management and asynchronous execution via `std::future`.
 - **🛡️ Security by Design:** TLS 1.2+ mandatory, strict SSL certificate verification, and protection against unsafe protocols.
 - **🧵 Thread-Safe:** Global initialization protected by `std::once_flag`, allowing use in multi-threaded environments without race condition risks.
@@ -121,29 +121,28 @@ export LOCOSYNC_AUTH_TOKEN="your_token_here"
 
 ---
 
+---
+
 ## 📁 Project Structure
 
 ```
-
 LocoSync/
-├── CMakeLists.txt # Build configuration file
+├── CMakeLists.txt                 # Build configuration file
 ├── include/
-│ └── locosync/
-│ ├── locosync.hpp # Main header
-│ ├── client.hpp
-│ ├── response.hpp
-│ ├── request.hpp
-│ └── interceptor.hpp
+│   └── locosync/
+│       ├── locosync.hpp           # Main header (aggregator)
+│       ├── client.hpp             # HTTP client
+│       ├── response.hpp           # Response structure
+│       ├── request.hpp            # Request structure
+│       └── interceptor.hpp        # Interceptor interface
 ├── src/
-│ ├── client.cpp
-│ ├── utils.cpp
-│ └── ...
+│   ├── client.cpp                 # Client implementation
+│   └── utils.cpp                  # Utilities
 ├── examples/
-│ └── basic_get.cpp
+│   └── basic_get.cpp              # Basic GET example
 ├── tests/
-│ └── test_client.cpp
-└── README.md
-
+│   └── test_client.cpp            # Client tests
+└── README.md                       # This file
 ```
 
 ---
@@ -167,4 +166,7 @@ Feel free to open Issues or send Pull Requests. Let's make the C++ ecosystem fri
 ## 📄 License
 
 Distributed under the MIT License. See LICENSE for more information.
+
+```
+
 ```
