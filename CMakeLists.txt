@@ -33,3 +33,5 @@ target_include_directories(locosync PUBLIC
 # Exemplo executável
 add_executable(example_basic examples/basic_get.cpp)
 target_link_libraries(example_basic PRIVATE locosync)
+# Se estiver usando vcpkg
+set(CMAKE_TOOLCHAIN_FILE "C:/Users/EduDevWin/Documents/GIT/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
