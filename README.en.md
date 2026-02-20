@@ -63,14 +63,41 @@ int main() {
 
 ### Using Interceptors (Ex: Auth Token)
 
+**⚠️ Best Practice:** Never hardcode tokens! Use environment variables:
+
 ```cpp
+#include <cstdlib>
+
 class AuthInterceptor : public locosync::Interceptor {
+private:
+    std::string token;
+
+public:
+    AuthInterceptor() {
+        // Get token from environment variable
+        const char* env_token = std::getenv("LOCOSYNC_AUTH_TOKEN");
+        if (env_token) {
+            token = std::string(env_token);
+        }
+    }
+
     void on_request(locosync::Request& req) override {
-        req.headers["Authorization"] = "Bearer my_secret_token";
+        if (!token.empty()) {
+            req.headers["Authorization"] = "Bearer " + token;
+        }
     }
 };
 
 client->add_interceptor(std::make_unique<AuthInterceptor>());
+```
+
+**Usage:**
+
+```bash
+export LOCOSYNC_AUTH_TOKEN="your_token_here"
+./your_application
+```
+
 ```
 
 ---
@@ -88,24 +115,26 @@ client->add_interceptor(std::make_unique<AuthInterceptor>());
 ## 📁 Project Structure
 
 ```
+
 LocoSync/
-├── CMakeLists.txt                 # Build configuration file
+├── CMakeLists.txt # Build configuration file
 ├── include/
-│   └── locosync/
-│       ├── locosync.hpp           # Main header
-│       ├── client.hpp
-│       ├── response.hpp
-│       ├── request.hpp
-│       └── interceptor.hpp
+│ └── locosync/
+│ ├── locosync.hpp # Main header
+│ ├── client.hpp
+│ ├── response.hpp
+│ ├── request.hpp
+│ └── interceptor.hpp
 ├── src/
-│   ├── client.cpp
-│   ├── utils.cpp
-│   └── ...
+│ ├── client.cpp
+│ ├── utils.cpp
+│ └── ...
 ├── examples/
-│   └── basic_get.cpp
+│ └── basic_get.cpp
 ├── tests/
-│   └── test_client.cpp
+│ └── test_client.cpp
 └── README.md
+
 ```
 
 ---
@@ -129,3 +158,4 @@ Feel free to open Issues or send Pull Requests. Let's make the C++ ecosystem fri
 ## 📄 License
 
 Distributed under the MIT License. See LICENSE for more information.
+```

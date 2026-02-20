@@ -63,14 +63,39 @@ int main() {
 
 ### Usando Interceptors (Ex: Auth Token)
 
+**⚠️ Melhor Prática:** Nunca hardcode tokens! Use variáveis de ambiente:
+
 ```cpp
+#include <cstdlib>
+
 class AuthInterceptor : public locosync::Interceptor {
+private:
+    std::string token;
+
+public:
+    AuthInterceptor() {
+        // Obtém o token da variável de ambiente
+        const char* env_token = std::getenv("LOCOSYNC_AUTH_TOKEN");
+        if (env_token) {
+            token = std::string(env_token);
+        }
+    }
+
     void on_request(locosync::Request& req) override {
-        req.headers["Authorization"] = "Bearer meu_token_secreto";
+        if (!token.empty()) {
+            req.headers["Authorization"] = "Bearer " + token;
+        }
     }
 };
 
 client->add_interceptor(std::make_unique<AuthInterceptor>());
+```
+
+**Usar assim:**
+```bash
+export LOCOSYNC_AUTH_TOKEN="seu_token_aqui"
+./seu_aplicativo
+```
 ```
 
 ---
