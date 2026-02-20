@@ -145,6 +145,71 @@ LocoSync/
 
 ---
 
+## 🛠️ Como usar LocoSync
+
+### 1. Requisição GET Simples (Assíncrona)
+
+```cpp
+#include <locosync/locosync.hpp>
+#include <iostream>
+
+int main() {
+    auto client = locosync::Client::create();
+
+    // O método .get() retorna um std::future<Response>
+    auto future_res = client->get("https://api.github.com/users/abacus-ai");
+
+    // Faça outras coisas enquanto a requisição processa...
+
+    auto res = future_res.get(); // Aguarda o resultado
+    if (res.ok()) {
+        std::cout << "User: " << res.json()["name"] << std::endl;
+    }
+    return 0;
+}
+```
+
+### 2. Requisição POST com JSON (Estilo Axios)
+
+```cpp
+auto body = nlohmann::json{{"username", "admin"}, {"password", "12345"}};
+
+client->post("https://api.exemplo.com/login", body)
+    .then([](auto res) {
+        if (res.status_code == 200) {
+            // Acesso fácil aos headers de resposta
+            std::string token = res.headers["Authorization"];
+            std::cout << "Login realizado! Token: " << token << std::endl;
+        }
+    });
+```
+
+### 3. Interceptors (Segurança e Automação)
+
+```cpp
+class SecurityInterceptor : public locosync::Interceptor {
+    void on_request(locosync::Request& req) override {
+        req.headers["X-Custom-Security-Header"] = "LocoSync-Protected";
+    }
+    void on_response(locosync::Response& res) override {
+        if (res.status_code == 401) {
+            std::cerr << "Alerta de Segurança: Acesso não autorizado!" << std::endl;
+        }
+    }
+};
+
+client->add_interceptor(std::make_unique<SecurityInterceptor>());
+```
+
+## 🛡️ Hardening de Segurança
+
+O LocoSync implementa práticas recomendadas de Segurança da Informação:
+
+- **TLS Hardening**: Desabilita versões antigas de SSL/TLS (SSLv2, SSLv3, TLS 1.0/1.1) para prevenir ataques de interceptação.
+- **Memory Safety**: Uso rigoroso de RAII e Smart Pointers para garantir que headers e handles do cURL sejam liberados, prevenindo vazamentos de memória.
+- **Protocol Lockdown**: Apenas http:// e https:// são permitidos, mitigando ataques de SSRF.
+- **Timeout Enforcement**: Timeouts de conexão e transferência obrigatórios para evitar ataques de Slowloris.
+
 ## 🚀 Roadmap
 
 - Suporte completo a HTTP/2.
