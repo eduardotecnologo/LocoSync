@@ -104,11 +104,20 @@ export LOCOSYNC_AUTH_TOKEN="your_token_here"
 
 ## 🛡️ Security First
 
+**LocoSync** was designed for developers who need a modern interface (JavaScript/Axios style) without sacrificing low-level control and extreme C++ performance.
+
 - **TLS 1.2+ Mandatory:** Protection against downgrade attacks.
 - **Strict SSL Certificate Verification:** Prevents insecure connections.
 - **Protocol Restricted to HTTP/HTTPS:** Mitigates SSRF attacks via unsafe protocols.
 - **Secure Memory Management:** Use of RAII and smart pointers to prevent leaks.
 - **Configurable Timeouts:** Prevents requests from hanging indefinitely.
+
+- **🚀 "Loco" Performance:** Persistent connection management and asynchronous execution via `std::future`.
+- **🛡️ Security by Design:** TLS 1.2+ mandatory, strict SSL certificate verification, and protection against unsafe protocols.
+- **🧵 Thread-Safe:** Global initialization protected by `std::once_flag`, allowing use in multi-threaded environments without race condition risks.
+- **📦 First-Class JSON:** Native integration with `nlohmann/json` for sending and receiving data.
+- **🔌 Powerful Interceptors:** Manipulate requests and responses globally (ideal for Auth Tokens and Logging).
+- **🔍 Full Header Access:** Complete support for reading response headers (Cookies, ETag, etc.).
 
 ---
 
