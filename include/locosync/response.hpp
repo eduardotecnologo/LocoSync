@@ -21,15 +21,16 @@ struct Response {
     }
 
     // Parsing de JSON com tratamento de exceção interno (Segurança)
-    nlohmann::json json() const 
-    {
+   nlohmann::json json() const {
         try {
             if (body.empty()) return nlohmann::json::object();
             return nlohmann::json::parse(body);
-        } catch (const nlohmann::json::parse_error& e) 
-        {
-            // Em um ambiente de produção, aqui logaríamos o erro de segurança/parsing
-            return nlohmann::json::object({{"error", "invalid_json"}, {"details", e.what()}});
+        } catch (const nlohmann::json::parse_error& e) {
+            // Correção aqui: Sintaxe de inicialização de objeto JSON
+            return nlohmann::json({
+                {"error", "invalid_json"}, 
+                {"details", e.what()}
+            });
         }
     }
     
