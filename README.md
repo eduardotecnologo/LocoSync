@@ -157,7 +157,7 @@ int main() {
     auto client = locosync::Client::create();
 
     // O método .get() retorna um std::future<Response>
-    auto future_res = client->get("https://api.github.com/users/abacus-ai");
+    auto future_res = client->get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0");
 
     // Faça outras coisas enquanto a requisição processa...
 
