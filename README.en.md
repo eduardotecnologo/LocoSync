@@ -121,8 +121,6 @@ export LOCOSYNC_AUTH_TOKEN="your_token_here"
 
 ---
 
----
-
 ## 📁 Project Structure
 
 ```
@@ -166,7 +164,3 @@ Feel free to open Issues or send Pull Requests. Let's make the C++ ecosystem fri
 ## 📄 License
 
 Distributed under the MIT License. See LICENSE for more information.
-
-```
-
-```

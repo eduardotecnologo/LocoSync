@@ -164,7 +164,3 @@ Sinta-se à vontade para abrir Issues ou enviar Pull Requests. Vamos tornar o ec
 ## 📄 Licença
 
 Distribuído sob a licença MIT. Veja LICENSE para mais informações.
-
-```
-
-```
