@@ -1,5 +1,7 @@
 # 🚀 LocoSync
 
+**[🇧🇷 Português](README.md)** | **[🇺🇸 English](README.en.md)**
+
 > ⚠️ **Projeto em Construção** - Este projeto ainda está em desenvolvimento ativo. As APIs podem mudar sem aviso prévio.
 
 **Crazy fast, sanely synchronous.**  
