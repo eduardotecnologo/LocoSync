@@ -73,6 +73,13 @@ client->add_interceptor(std::make_unique<AuthInterceptor>());
 
 ---
 
+🛡️ Segurança em Primeiro Lugar
+TLS 1.2+ obrigatório: Proteção contra ataques de downgrade.
+Verificação rigorosa de certificados SSL: Evita conexões inseguras.
+Protocolo restrito a HTTP/HTTPS: Mitiga ataques SSRF via protocolos inseguros.
+Gerenciamento seguro de memória: Uso de RAII e smart pointers para evitar vazamentos.
+Timeouts configuráveis: Evita que requisições travem indefinidamente.
+
 ## 📁 Estrutura do Projeto
 
 ```
